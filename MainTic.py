@@ -1,9 +1,9 @@
 #Import Needed libraries, maybe numPy, random, sys? 
 import sys
 ##Define Board 3x3 
-board =[[1,1,1],
-        [0,0,0],
-        [0,2,0]]
+board =[[0,0,1],
+        [0,1,0],
+        [1,0,0]]
 
 #defines board numbers as Xs or Os
 def printXO(xo):
@@ -64,11 +64,42 @@ def threeOfKind(thisList):
     else:
         return False
 def winner(thisBoard):
-    #Horizontal
+#Horizontal Winner
     for row in thisBoard:
         if threeOfKind(row):
             print(f"Player {row[0]} is the winner")
             return True
+#Vertical
+    for i in range(len(thisBoard)):
+        vert = []
+        #range from 0-2
+        for j in range(len(thisBoard)):
+            #adds element at 0 position from every row to vert
+            vert.append(thisBoard[j][i])
+            #checks if all the values are the same if they are, winner!
+        if threeOfKind(vert):
+            print(f"Player {vert[0]} is the winner")
+            return True
+#Right Diagonal
+    r_diag = []
+    for p in range(len(thisBoard)):
+        for l in range(len(thisBoard)):
+            if p+l == len(thisBoard) - 1:
+                r_diag.append(thisBoard[p][l])
+    if threeOfKind(r_diag):
+        print(f"Player {r_diag[0]} is the winner")
+        return True 
+
+#Left Diagonal
+    l_diag = []
+    for i in range(len(thisBoard)):
+        l_diag.append(thisBoard[i][i])
+    if threeOfKind(l_diag):
+         print(f"Player {l_diag[0]} is the winner")
+         return True    
+
+
+
 
 if winner(board):
     print("Winner")
