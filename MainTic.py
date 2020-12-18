@@ -35,14 +35,25 @@ def userInput(thisBoard, currentPlayer):
     
     row = int(input("Please choose a row to play: "))
     column = int(input("Please choose a column to play: "))
+    #If the space is empty take it
+    #added error handling Try Except for index error.
 
-    if thisBoard[row][column] == 0:
-        thisBoard[row][column] = currentPlayer
-    else:
-        print("Taken! please choose again.")
-        userInput(thisBoard,currentPlayer)
-    
-    userInput(board,1)
-    show_board(board)
+    try:
+        if thisBoard[row][column] == 0:
+            thisBoard[row][column] = currentPlayer
+        else: #if the space is taken print Taken 
+            print("Taken! please choose again.")
+            userInput(thisBoard,currentPlayer)
+    except IndexError as e:
+        print("Please use the format for rows and columns with 0, 1 or 2")
+        userInput(thisBoard, currentPlayer)
+    except Exception as e:
+        print("Error", e)
+        userInput(thisBoard, currentPlayer)
 
-    sys.stdin.readline()
+
+
+userInput(board,1)
+show_board(board)
+
+sys.stdin.readline()
