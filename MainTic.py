@@ -5,13 +5,21 @@ board =[[0,0,0],
         [0,0,0],
         [0,0,0]]
 
-#Prints a horizontal axis for the board
-print(" ".join([str(i)for i in range (len(board))]))
 
-#print(board)
+#Function that prints board to terminal.        
+def show_board(thisBoard):
+#Prints  axis for the board
+    print("  "+"   ".join([str(i) for i in range(len(thisBoard))]))
 #For all rows in the board, for all columns in rows print "" to space out into 3x3 
-for i in board:
-    for j in i:
-        print(j, end = " ")
-    print(" ")
+    count = 0
+    for i in thisBoard:
+        in_row = ""
+        for j in i[:len(thisBoard)-1]:
+            in_row+=str(j)+" | "
+        in_row+=str(i[len(thisBoard)-1])
+        print(count,in_row)
+        if count!=len(thisBoard)-1:
+            print("  ----------")
+        count+=1
 
+show_board(board)
