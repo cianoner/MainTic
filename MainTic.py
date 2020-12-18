@@ -1,7 +1,7 @@
 #Import Needed libraries, maybe numPy, random, sys? 
 import sys
 ##Define Board 3x3 
-board =[[0,1,0],
+board =[[1,1,1],
         [0,0,0],
         [0,2,0]]
 
@@ -50,6 +50,33 @@ def userInput(thisBoard, currentPlayer):
     except Exception as e:
         print("Error", e)
         userInput(thisBoard, currentPlayer)
+
+#Function that checks for wins
+#Vertical Win
+#Horizontal Win 
+#Diagonal Win
+
+#threeOfKind returns true of all elements are the same.
+#stops a winning condition with an empty board.
+def threeOfKind(thisList):
+    if thisList.count(thisList[0])==len(thisList) and thisList[0]!=0:
+        return True
+    else:
+        return False
+def winner(thisBoard):
+    #Horizontal
+    for row in thisBoard:
+        if threeOfKind(row):
+            print(f"Player {row[0]} is the winner")
+            return True
+
+if winner(board):
+    print("Winner")
+else:
+    print("No winner")
+
+
+
 
 
 
