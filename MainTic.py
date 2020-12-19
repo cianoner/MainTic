@@ -1,9 +1,8 @@
 #Import Needed libraries, maybe numPy, random, sys? 
 import sys
+import itertools
 ##Define Board 3x3 
-board =[[0,0,1],
-        [0,1,0],
-        [1,0,0]]
+
 
 #defines board numbers as Xs or Os
 def printXO(xo):
@@ -28,7 +27,7 @@ def show_board(thisBoard):
         if count!=len(thisBoard)-1:
             print("  ----------")
         count+=1
-show_board(board)
+
 #function that allows user input. passes in the current board and the current player
 def userInput(thisBoard, currentPlayer):
     print("\t Current Player: ", currentPlayer)
@@ -99,19 +98,42 @@ def winner(thisBoard):
          return True    
 
 
+# if winner(board):
+#     print("Winner")
+# else:
+#     print("No winner")
 
+game = True
+while game:
+    board =[[0,0,0],
+        [0,0,0],
+        [0,0,0]]
 
-if winner(board):
-    print("Winner")
-else:
-    print("No winner")
+#Loops game while nobody is the winner.
+    game_win = False
+    show_board(board) # Shows the board before first move is made
+    counter = 0 #Variable to track tie game
+    playerChoose = itertools.cycle([1,2]) #Iterates of Player 1 and 2
+    while not game_win:
+        currentPlayer = next(playerChoose)
+        userInput(board,currentPlayer)
+        counter+=1
+        show_board(board)
+        if winner(board) or counter == 9:
+        #Checks for draw 
+            if counter == 9:
+                print("Tie Game! ")
+            game_win = True
+            again = input("Would you like to play again? (y/n): ")
+            if again.lower()=="y":
+                print("Loading new game... ")
+                game = True
+            elif again.lower() == "n":
+                print("Goodbye!")
+                game = False
+            else:
+                print("Invalid choice, Goodbye!")
+                game = False
 
-
-
-
-
-
-userInput(board,1)
-show_board(board)
 
 sys.stdin.readline()
